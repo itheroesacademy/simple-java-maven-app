@@ -24,14 +24,21 @@ pipeline {
 
             post { 
                 always { 
-                   junit stdioRetention: '', testResults: '**/target/surefire-reports/TEST-com.mycompany.app.AppTest.xml'
+                   junit stdioRetention: '', testResults: 'devops-1-may/target/surefire-reports/TEST-com.mycompany.app.AppTest.xml'
                 }
             }
         }
         stage('Deliver') {
             steps {
-                echo 'Deploy on Ec-2'
+                eco 'Deploy on Ec-2'
             }
+        }
+    }
+
+    post { 
+        failure { 
+            echo 'Failure!'
+            mail bcc: '', body: '${env.JOB_URL} ', cc: '', from: '', replyTo: '', subject: 'Pipeline Failed: "${env.JOB_NAME} - Build $(env.BUILD_NUMBER)"', to: 'tasikadubey@gmail.com'
         }
     }
 }
