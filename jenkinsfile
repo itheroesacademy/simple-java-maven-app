@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                echo 'Deploy on Ec-2'
+                ech 'Deploy on Ec-2'
             }
         }
     }
