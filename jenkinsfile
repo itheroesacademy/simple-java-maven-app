@@ -24,13 +24,13 @@ pipeline {
 
             post { 
                 always { 
-                   junit stdioRetention: '', testResults: 'devops-1-may/target/surefire-reports/TEST-com.mycompany.app.AppTest.xml'
+                   junit stdioRetention: '', testResults: '**/target/surefire-reports/TEST-com.mycompany.app.AppTest.xml'
                 }
             }
         }
         stage('Deliver') {
             steps {
-                eco 'Deploy on Ec-2'
+                echo 'Deploy on Ec-2'
             }
         }
     }
